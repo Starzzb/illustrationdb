@@ -1,0 +1,226 @@
+/* 现代化色彩系统 */
+:root {
+    --primary-color: #6366f1; /* 紫蓝色主色调 */
+    --primary-hover: #4f46e5;
+    --secondary-color: #8b5cf6; /* 紫色辅助色 */
+    --accent-color: #06b6d4; /* 青色强调色 */
+    --background-light: #ffffff;
+    --background-dark: #f9fafb;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --border-radius: 16px;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 现代化卡片设计 */
+.gallery-card {
+    position: relative;
+    transition: var(--transition-smooth);
+    overflow: hidden;
+    height: 100%;
+    border: none !important;
+    border-radius: var(--border-radius) !important;
+    background: var(--background-light);
+    box-shadow: var(--shadow-light);
+    will-change: transform;
+}
+
+.gallery-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 80%);
+    opacity: 0;
+    transition: var(--transition-smooth);
+    pointer-events: none;
+}
+
+.gallery-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: var(--shadow-heavy) !important;
+}
+
+.gallery-card:hover::before {
+    opacity: 1;
+}
+
+/* 图片容器现代化 */
+.image-container {
+    position: relative;
+    overflow: hidden;
+    height: 320px;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: var(--transition-smooth);
+}
+
+.gallery-card:hover .image-container::before {
+    left: 100%;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: grayscale(0.1);
+}
+
+.gallery-card:hover .image-container img {
+    transform: scale(1.15);
+    filter: grayscale(0);
+}
+
+/* 现代化遮罩层 */
+.overlay {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    background: linear-gradient(
+        to top,
+        rgba(15, 23, 42, 0.95) 0%,
+        rgba(15, 23, 42, 0.7) 30%,
+        rgba(15, 23, 42, 0.3) 60%,
+        transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease, backdrop-filter 0.5s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 28px;
+    box-sizing: border-box;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.overlay-text {
+    color: white;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    max-height: 100%;
+    overflow-y: auto;
+    transform: translateY(60px);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 0.1s;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 悬停时显示 */
+.gallery-card:hover .overlay {
+    opacity: 1;
+}
+
+.gallery-card:hover .overlay-text {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* 美化滚动条（Chrome/Edge/Safari） */
+.overlay-text::-webkit-scrollbar {
+    width: 6px;
+}
+
+.overlay-text::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+}
+
+.overlay-text::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* 现代化浮动按钮 */
+.fab {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+    transition: var(--transition-bounce);
+    cursor: pointer;
+    will-change: transform;
+}
+
+.fab:hover {
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
+    background: linear-gradient(135deg, var(--primary-hover), #7c3aed);
+}
+
+.fab:active {
+    transform: scale(0.95);
+}
+
+/* 现代化模态框 */
+.modal.fade .modal-dialog {
+    transition: transform 0.4s var(--transition-bounce);
+    transform: scale(0.85) translateY(20px);
+}
+
+.modal.show .modal-dialog {
+    transform: scale(1) translateY(0);
+}
+
+.modal-content {
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .gallery-card:hover {
+        transform: translateY(-8px) scale(1.01);
+    }
+    
+    .fab {
+        bottom: 24px;
+        right: 24px;
+        width: 56px;
+        height: 56px;
+    }
+    
+    .overlay {
+        padding: 20px;
+    }
+}
